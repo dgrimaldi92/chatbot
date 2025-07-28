@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {  
+  --color-default-blue: oklch(0.2463 0.0401 266.86);
+}
+
+:root {
+  --background-rgb: 214, 219, 220;
+  --foreground-rgb: 0, 0, 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-rgb: 24, 32, 52;
+    --foreground-rgb: 255, 255, 255;
+  }
+}
+
+body {
+  background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+}
+
+button {
+  padding: 0.5rem 1rem;               /* py-2 px-4 */
+  background-color: oklch(82.3% 0.12 346.018);          /* bg-pink-400 */
+  color: #ffffff;                     /* text-white */
+  border-radius: 0.25rem;             /* rounded (4px) */
+  cursor: pointer;                    /* cursor-pointer */
+  font-size: 1rem;                    /* text-base */
+
+  outline: none;                      /* focus:outline-none */
+  transition: background-color 0.2s, color 0.2s; /* optional, smooth hover */
+}
+
+button:hover {
+  background-color: oklch(89.9% 0.061 343.231);          /* hover:bg-pink-300 */
+}
+
