@@ -10,7 +10,7 @@
 # ]
 # ///
 
-token = "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"
+token = ""
 
 import torch
 from accelerate import Accelerator
