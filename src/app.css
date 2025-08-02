@@ -37,3 +37,17 @@ button:hover {
   background-color: oklch(89.9% 0.061 343.231);          /* hover:bg-pink-300 */
 }
 
+p, pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: justify;
+    padding: 1rem !important;
+}
+
+
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    padding: initial;
+  }
+}
+

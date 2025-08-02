@@ -1,21 +1,20 @@
-import { action, query, revalidate } from "@solidjs/router";
+import { action, query } from "@solidjs/router";
 import ollama from "ollama";
-import pythonRunning from "~/libraries/process";
+import { disableModel, runPythonCrawler } from "~/libraries/process";
 
 import {
-  createMessage,
-  readAllMessagesByConversationId,
+	createMessage,
+	readAllMessagesByConversationId,
+	updateMessage,
 } from "../data-access/crud";
-import type Message from "./domain";
+import { type Message, MessageStatus } from "./domain";
 
 export const getAllMessagesByConversationId = query(
-  async (id, _options = {}) => {
-    "use server";
-    return readAllMessagesByConversationId(id).then(
-      (r) => r as unknown as Message[]
-    );
-  },
-  "messagesByConversationId"
+	async (id, _options = {}) => {
+		"use server";
+		return (await readAllMessagesByConversationId(id)) as unknown as Message[];
+	},
+	"messagesByConversationId",
 );
 
 // export async function getAllMessagesByConversationId(conversationId: string) {
@@ -37,54 +36,62 @@ export const getAllMessagesByConversationId = query(
 // }
 
 export const postMessage = action(
-  async (conversationId: string, formData: FormData) => {
-    "use server";
-    const content = formData.get("content")?.toString();
-    if (content === undefined) return;
+	async (conversationId: string, formData: FormData) => {
+		"use server";
+		const content = formData.get("content")?.toString();
+		if (content === undefined) {
+			return;
+		}
+		const metadataString: string | null = null; //metadata ? JSON.stringify(metadata) : null;
 
-    const metadataString = null; //metadata ? JSON.stringify(metadata) : null;
-    const list = await ollama.list();
-    console.log(list);
+		createMessage({
+			type: "user",
+			content,
+			conversationId,
+			metadata: metadataString,
+			status: MessageStatus.DELIVERED,
+		});
 
-    const response = await ollama.chat({
-      //   model: "hf.co/mradermacher/JSL-MedQwen-14b-reasoning-GGUF:Q4_K_M",
-      model: "deepseek-r1:latest",
-      messages: [{ role: "user", content }],
-      think: false,
-      //   stream: true,
-    });
+		const responseId = createMessage({
+			type: "assistant",
+			content: null,
+			conversationId,
+			metadata: metadataString,
+			status: MessageStatus.LOADING,
+		});
 
-    createMessage({
-      type: "user",
-      content,
-      conversationId,
-      metadata: metadataString,
-    });
+		// const list = await ollama.list();
+		const model = "gemma3n:latest"; //"gemma3n:latest"; // "hf.co/mradermacher/JSL-MedQwen-14b-reasoning-GGUF:Q4_K_M"; ;
+		const response = await ollama.chat({
+			model,
+			messages: [{ role: "user", content }],
+			//   stream: true,
+		});
 
-    const finalResponse = response.message.content;
+		const finalResponse = response.message.content;
 
-    // for await (const part of response) {
-    //   console.log(part.message.content);
-    //   finalResponse += part.message.content;
-    // }
+		// for await (const part of response) {
+		//   console.log(part.message.content);
+		//   finalResponse += part.message.content;
+		// }
 
-    createMessage({
-      type: "assistant",
-      content: finalResponse,
-      conversationId,
-      metadata: metadataString,
-    });
-    await revalidate(getAllMessagesByConversationId.key);
-  }
+		updateMessage({
+			id: responseId,
+			content: finalResponse,
+			conversationId,
+			status: MessageStatus.DELIVERED,
+		});
+		await disableModel(model);
+	},
 );
 
 export async function generateImage() {
-  "use server";
-  //   await pythonRunning();
-  console.log("helo");
-  const resp = await ollama.generate({
-    model: "hf.co/mradermacher/JSL-MedQwen-14b-reasoning-GGUF:Q4_K_M",
-    prompt: "Hello world <laugh>",
-  });
-  console.log(resp);
+	"use server";
+	await runPythonCrawler();
+	// console.log("helo");
+	// const resp = await ollama.generate({
+	//   model: "hf.co/mradermacher/JSL-MedQwen-14b-reasoning-GGUF:Q4_K_M",
+	//   prompt: "Hello world <laugh>",
+	// });
+	// console.log(resp);
 }

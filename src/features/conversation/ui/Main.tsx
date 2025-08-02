@@ -1,32 +1,31 @@
 import { A } from "@solidjs/router";
-import Insert from "./Insert";
+import { Insert } from "./Insert";
 
-export default function Main() {
-  return (
-    <main class="text-center mx-auto text-gray-700 p-4">
-      <h1 class="max-6-xs text-6xl text-pink-300 font-thin uppercase my-16">
-        Hello world!
-      </h1>
-      <Insert />
-      <p class="mt-8">
-        Visit{" "}
-        <a
-          href="https://solidjs.com"
-          target="_blank"
-          class="text-pink-300 hover:underline"
-          rel="noopener"
-        >
-          solidjs.com
-        </a>{" "}
-        to learn how to build Solid apps.
-      </p>
-      <p class="my-4">
-        <span>Home</span>
-        {" - "}
-        <A href="/about" class="text-pink-300 hover:underline">
-          About Page
-        </A>{" "}
-      </p>
-    </main>
-  );
+export function Main() {
+	return (
+		<main class="text-center mx-auto text-gray-700 p-4">
+			<h1 class="max-6-xs text-6xl text-pink-300 font-thin uppercase my-16">
+				Hello world!
+			</h1>
+			<Insert />
+			<p class="mt-8">
+				Visit
+				<a
+					href="https://solidjs.com"
+					target="_blank"
+					class="text-pink-300 hover:underline"
+					rel="noopener"
+				>
+					solidjs.com
+				</a>
+				to learn how to build Solid apps.
+			</p>
+			<p class="my-4">
+				<span>Home</span>" - "
+				<A href="/about" class="text-pink-300 hover:underline">
+					About Page
+				</A>
+			</p>
+		</main>
+	);
 }

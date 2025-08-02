@@ -1,5 +1,6 @@
 import pino from "pino";
 
 const logger = pino({ browser: { asObject: true } });
+const serverLogger = pino();
 
-export default logger;
+export { logger, serverLogger };

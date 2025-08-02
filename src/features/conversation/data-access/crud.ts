@@ -1,4 +1,4 @@
-import db from "~/libraries/db";
+import { db } from "~/libraries/db";
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS conversations(
@@ -10,19 +10,19 @@ db.exec(`
 `);
 
 export function readAllConversations() {
-  const query = db.prepare(
-    "SELECT * FROM conversations ORDER BY created_at ASC"
-  );
-  return query.all();
+	const query = db.prepare(
+		"SELECT * FROM conversations ORDER BY created_at ASC",
+	);
+	return query.all();
 }
 
 export function createConversation(title: string): string {
-  const id = crypto.randomUUID();
-  // Create a prepared statement to insert data into the database.
-  const insert = db.prepare(
-    "INSERT INTO conversations (id, title) VALUES (?, ?)"
-  );
-  // Execute the prepared statement with bound values.
-  insert.run(id, title);
-  return id;
+	const id = crypto.randomUUID();
+	// Create a prepared statement to insert data into the database.
+	const insert = db.prepare(
+		"INSERT INTO conversations (id, title) VALUES (?, ?)",
+	);
+	// Execute the prepared statement with bound values.
+	insert.run(id, title);
+	return id;
 }
