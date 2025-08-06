@@ -36,19 +36,32 @@
 //     },
 //   };
 // }
-
 import { exec, spawn } from "node:child_process";
 import { serverLogger } from "./logger";
 
 function runCommand(command: string, args: string[]) {
-	return new Promise<void>((resolve, reject) => {
-		const proc = spawn(command, args, { stdio: "inherit" });
+	return new Promise<string>((resolve, reject) => {
 
-		proc.stdout?.on("data", (data) => console.log(data));
+		const chunks: Uint8Array[] = [];
+		const proc = spawn(command, args);
+
+		proc.stdout?.on("data", (data) => chunks.push(data));
+		
 
 		proc.on("close", (code) => {
 			if (code === 0) {
-				resolve();
+				const utf8decoder = new TextDecoder();
+				const buffer = Buffer.concat(chunks);
+				const decodedOutput = utf8decoder.decode(buffer)
+
+				
+				try {
+					resolve(decodedOutput);
+				} catch (error) {
+					reject(new Error(`Error during transform output ${error}`));
+				}
+			
+				
 			} else {
 				reject(new Error(`${command} exited with code ${code}`));
 			}
@@ -111,6 +124,25 @@ export async function runPythonCrawler() {
 		serverLogger.error("❌ Error:", (err as Error).message);
 	}
 }
+
+export async function runPythonWebSearch(query: string) {
+	try {
+		// await runCommand("uv", [
+		// 	"add",
+		// 	"--script",
+		// 	"scripts/crawler.py",
+		// 	"crawl4ai",
+		// 	"asyncio",
+		// 	"orjson",
+		// ]);
+
+		return await runCommand("uv", ["run", "pipeline/src/pipeline/main.py", query]);
+	} catch (err) {
+		console.log(err)
+		serverLogger.error("❌ Error:", (err as Error).message);
+	}
+}
+
 
 export async function disableModel(model: string) {
 	try {

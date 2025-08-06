@@ -28,6 +28,7 @@ export function MessageList() {
 	});
 
 	createEffect(() => {
+		messages()
 		if (lastMessageReference) {
 			lastMessageReference.scrollIntoView({
 				behavior: "smooth",

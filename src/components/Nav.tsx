@@ -7,7 +7,7 @@ import {
 	splitProps,
 } from "solid-js";
 
-import { generateImage } from "~/features/message/domain/service";
+import { webSearch } from "~/features/message/domain/service";
 import { CloseIcon } from "~/features/shared/ui/CloseIcon";
 import { ListIcon } from "~/features/shared/ui/ListIcon";
 
@@ -52,8 +52,8 @@ export function Nav(props: NavProps) {
 				<li class={`border-b-2 ${active("/about")} mx-1.5 sm:mx-6`}>
 					<A href="/about">About</A>
 				</li>
-				<button type="button" class="bg-gray-500!" onClick={generateImage}>
-					🌸​
+				<button type="button" class="bg-gray-500!" onClick={webSearch}>
+					🌸
 				</button>
 			</ul>
 		</nav>

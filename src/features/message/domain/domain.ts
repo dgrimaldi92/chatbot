@@ -23,3 +23,11 @@ export interface Message {
 	metadata?: MessageMetadata;
 	status: MessageStatusValues;
 }
+
+export interface Search {
+	chunks: {
+		url: string,
+		sentence: string,
+		score: number
+	}[]
+}

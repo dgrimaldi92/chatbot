@@ -13,7 +13,7 @@ export function MessageDetails(props: MessageDetailsProps) {
 		<Switch fallback={<div>Not Found</div>}>
 			<Match when={message.status === MessageStatus.DELIVERED}>
 				<div
-					class={`flex items-start space-x-2 ${message.type === "user" ? "justify-end" : ""}`}
+					class={`flex items-start space-x-2 ${message.type === "user" ? "justify-end" : ""} w-0 min-w-full`}
 				>
 					<div
 						class={`${message.type === "user" ? "bg-pink-200 flex-row-reverse" : "text-pink-300"} text-gray-800 p-3 rounded-xl rounded-br-none shadow flex`}
@@ -58,24 +58,4 @@ export function MessageDetails(props: MessageDetailsProps) {
 			</Match>
 		</Switch>
 	);
-	// 	return (
-	// 		<Switch fallback={<div>Not Found</div>}>
-	// 			<Match when={message.type === "user"}>
-	// 				<div class="flex items-start justify-end space-x-2">
-	// 					<div
-	// 						class="bg-pink-200 text-gray-800 p-3 rounded-xl rounded-br-none shadow"
-	// 						innerHTML={parser(message.content)}
-	// 					/>
-	// 				</div>
-	// 			</Match>
-	// 			<Match when={message.type === "assistant"}>
-	// 				<div class="flex items-start ">
-	// 					<div
-	// 						class="bg-pink-100 text-gray-800 p-3 rounded-xl rounded-bl-none shadow"
-	// 						innerHTML={parser(message.content)}
-	// 					/>
-	// 				</div>
-	// 			</Match>
-	// 		</Switch>
-	// 	);
 }

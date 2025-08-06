@@ -41,7 +41,7 @@ export function List(props: ListProps) {
 
 	return (
 		<Show when={showList?.() ?? false}>
-			<div class="z-10">
+			<div class="z-100">
 				<div role="dialog" aria-modal="true" aria-labelledby="drawer-title">
 					<div
 						aria-hidden="true"

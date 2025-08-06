@@ -5,5 +5,12 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
+		server: {
+			watch: {
+				// Ignore changes in the 'ignored-folder' directory
+				ignored: ['**/pipeline/**']
+			}
+		}
 	},
+	
 });
