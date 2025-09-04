@@ -1,25 +1,63 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
-	"vcs": {
-		"enabled": false,
-		"clientKind": "git",
-		"useIgnoreFile": false
+	"$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on",
+				"useSortedKeys": "on"
+			}
+		},
+		"enabled": true
 	},
 	"files": {
-		"ignoreUnknown": false
+		"experimentalScannerIgnores": [
+			"node_modules",
+			"pipeline",
+			"scripts",
+			"tools",
+			"src/libraries/protos",
+			"makefile",
+			"protos",
+			"img",
+			"public"
+		],
+		"ignoreUnknown": false,
+		"includes": [
+			"src/**/*.{js,ts,tsx,json}",
+			"!src/libraries/markdownTable.ts",
+			"!node_modules",
+			"!pipeline",
+			"!scripts",
+			"!tools",
+			"!src/libraries/protos",
+			"!makefile",
+			"!protos",
+			"!img",
+			"!public"
+		]
 	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab"
 	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"json": {
+		"formatter": {
+			"trailingCommas": "none"
+		}
+	},
 	"linter": {
+		"domains": {
+			"solid": "all"
+		},
 		"enabled": true,
 		"rules": {
 			"a11y": "on",
 			"complexity": "on",
-			"performance": "on",
-			"security": "on",
-			"suspicious": "on",
 			"correctness": {
 				"noChildrenProp": "on",
 				"noConstAssign": "on",
@@ -64,6 +102,9 @@
 				"useValidTypeof": "on",
 				"useYield": "on"
 			},
+			"nursery": "off",
+			"performance": "on",
+			"security": "on",
 			"style": {
 				"noCommonJs": "on",
 				"noDefaultExport": "on",
@@ -123,28 +164,13 @@
 				"useThrowNewError": "on",
 				"useThrowOnlyError": "on"
 			},
-			"nursery": "off"
-		},
-		"domains": {
-			"solid": "all"
+			"suspicious": "on"
 		}
 	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double"
-		}
-	},
-	"json": {
-		"formatter": {
-			"trailingCommas": "none"
-		}
-	},
-	"assist": {
-		"enabled": true,
-		"actions": {
-			"source": {
-				"organizeImports": "on"
-			}
-		}
+
+	"vcs": {
+		"clientKind": "git",
+		"enabled": false,
+		"useIgnoreFile": false
 	}
 }

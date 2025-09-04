@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package llm;
+
+import "post_text_request.proto";
+import "post_text_response.proto";
+
+service LLM {
+  // Simple generation call
+  rpc GenerateText(GenerateRequest) returns (GenerateResponse);
+}

@@ -1,0 +1,11 @@
+syntax="proto3";
+
+package scrape;
+
+import "get_content_request.proto";
+import "get_content_response.proto";
+
+
+service ScraperService {
+  rpc GetScrapedText(GetScrapeRequest) returns (GetScrapedResponse);
+}

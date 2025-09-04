@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package llm;
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ASSISTANT = 1;
+  ROLE_USER = 2;
+  ROLE_SYSTEM = 3;
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package llm;
+
+import "prompt.proto";
+
+message GenerateResponse {
+  Prompt prompt = 1;
+}

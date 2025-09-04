@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package llm;
+
+import "role.proto";
+
+
+message Prompt {
+    string content = 1;
+    Role role = 2;
+}

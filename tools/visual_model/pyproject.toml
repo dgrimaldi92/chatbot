@@ -1,0 +1,83 @@
+[project]
+name = "visual-model"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "diffusers>=0.35.1",
+    "grpcio-tools>=1.74.0",
+    "grpclib>=0.4.8",
+    "loguru>=0.7.3",
+    "orjson>=3.11.2",
+    "pdf2image>=1.17.0",
+    "pillow>=11.3.0",
+    "torch>=2.8.0",
+]
+
+[dependency-groups]
+dev = ["ruff>=0.12.8"]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = ["protos", ".venv"]
+
+[tool.ruff.lint]
+select = [
+    "ERA",
+    "YTT",
+    "ANN",
+    "ASYNC",
+    "S",
+    "FBT",
+    "B",
+    "A",
+    "COM",
+    "C4",
+    "DTZ",
+    "EM",
+    "FIX",
+    "FA",
+    "ISC",
+    "ICN",
+    "LOG",
+    "G",
+    "PIE",
+    "T20",
+    "PYI",
+    "PT",
+    "Q",
+    "RSE",
+    "RET",
+    "SLF",
+    "TID",
+    "TC",
+    "ARG",
+    "PTH",
+    "FLY",
+    "I",
+    "C90",
+    "NPY",
+    "N",
+    "PERF",
+    "E",
+    "F",
+    "UP",
+    "SIM",
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+    "UP",
+    "FURB",
+    "RUF",
+    "TRY",
+]
+fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+# Ignore `N802` (Function name should be lowercase) in main.py files, because proto interfaces are CamelCase`.
+"main.py" = ["N802"]
+
+[tool.uv.workspace]
+members = ["src/pipeline/web-search"]

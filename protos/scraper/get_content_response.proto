@@ -1,0 +1,9 @@
+syntax="proto3";
+
+package scrape;
+
+import "scrape.proto";
+
+message GetScrapedResponse {
+  repeated Scrape scrape = 1;
+}

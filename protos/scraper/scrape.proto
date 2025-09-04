@@ -1,0 +1,8 @@
+syntax="proto3";
+
+package scrape;
+
+message Scrape {
+  string content = 1;
+  string url = 2;
+}

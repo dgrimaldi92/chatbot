@@ -3,25 +3,32 @@
 	"type": "module",
 	"scripts": {
 		"lint": "biome lint",
+		"fix": "biome format --write",
 		"dev": "vinxi dev --host",
 		"build": "vinxi build",
-		"start": "vinxi start"
+		"start": "vinxi start",
+		"gen-proto": "npx protoc --ts_out ./src/libraries/protos --proto_path ./protos ./protos/llm.proto"
 	},
 	"dependencies": {
+		"@grpc/grpc-js": "^1.13.4",
+		"@protobuf-ts/grpc-transport": "^2.11.1",
 		"@solidjs/router": "^0.15.0",
 		"@solidjs/start": "^1.1.0",
+		"google-protobuf": "^3.21.4",
 		"isomorphic-dompurify": "^2.26.0",
 		"marked": "^15.0.12",
 		"marked-extended-tables": "^2.0.1",
-		"ollama": "^0.5.16",
-		"pino": "^9.7.0",
-		"solid-js": "^1.9.5",
+		"pino": "^9.9.0",
+		"solid-js": "^1.9.9",
 		"vinxi": "^0.5.7"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.1.2",
-		"@tailwindcss/vite": "^4.1.11",
-		"tailwindcss": "^4.1.11"
+		"@biomejs/biome": "^2.2.0",
+		"@protobuf-ts/plugin": "^2.11.1",
+		"@tailwindcss/vite": "^4.1.12",
+		"grpc-tools": "^1.13.0",
+		"protoc-gen-ts": "^0.8.7",
+		"tailwindcss": "^4.1.12"
 	},
 	"engines": {
 		"node": ">=24"

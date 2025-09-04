@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package llm;
+
+import "type.proto";
+import "prompt.proto";
+
+message GenerateRequest {
+  ProtoType type = 1;
+  Prompt prompt = 2;
+}

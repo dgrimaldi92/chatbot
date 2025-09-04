@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package llm;
+
+enum ProtoType {
+  TYPE_UNSPECIFIED = 0;
+  TYPE_MESSAGE = 1;
+  TYPE_SEARCH = 2;
+  TYPE_THINK = 3;
+}
